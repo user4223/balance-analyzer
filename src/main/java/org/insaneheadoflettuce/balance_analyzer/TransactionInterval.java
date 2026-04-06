@@ -12,7 +12,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class TransactionInterval extends AbstractTransactionCollection {
     public enum Type {
@@ -27,7 +26,7 @@ public class TransactionInterval extends AbstractTransactionCollection {
             Type.YEAR, "year"
     );
 
-    private static Logger logger = LogManager.getLogger(TransactionInterval.class);
+    private static final Logger logger = LogManager.getLogger(TransactionInterval.class);
 
     private final LocalDate begin;
     private final LocalDate end;
@@ -63,6 +62,11 @@ public class TransactionInterval extends AbstractTransactionCollection {
     }
 
     public TransactionInterval(LocalDate begin, LocalDate end, Cluster cluster) {
+        this(begin, end, cluster, null);
+    }
+
+    public TransactionInterval(LocalDate begin, LocalDate end, Cluster cluster, TransactionInterval parentInterval) {
+        super(parentInterval);
         this.begin = begin;
         this.end = end;
         this.cluster = cluster;
@@ -107,6 +111,6 @@ public class TransactionInterval extends AbstractTransactionCollection {
         return cluster.getTransactions().stream()
                 .filter(isInInterval)
                 .sorted(Comparator.comparing(Transaction::getValueDate).reversed())
-                .collect(Collectors.toList());
+                .toList();
     }
 }

@@ -57,7 +57,7 @@ body {
 
 .transactionIntervalHeader, .headline, .clusters, .transactions, .overview {
     border: 0px;
-    background-color: #5c9ef0;
+    background-color: #636363;
 / / #5299EF;
 }
 
@@ -82,8 +82,8 @@ div.monthTransactionInterval {
 
 div.yearTransactionInterval {
     padding: 0px;
-    margin-bottom: 10px;
-    border: 3px solid #5c9ef0;
+    margin-bottom: 5px;
+    border: 3px solid #636363;
 / / #5299EF;
     background-color: #e0e0e0;
     border-radius: 8px;

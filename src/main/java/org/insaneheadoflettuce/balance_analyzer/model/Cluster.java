@@ -32,6 +32,10 @@ public class Cluster extends AbstractTransactionCollection {
         return Double.valueOf(s - f).intValue();
     };
 
+    protected Cluster() {
+        super(null);
+    }
+
     public static Cluster create(String name, boolean isConsuming, List<Transaction> transactions) {
         if (isConsuming && transactions.stream().anyMatch(Transaction::isClustered)) {
             throw new IllegalArgumentException("Transaction cannot be consumed twice");

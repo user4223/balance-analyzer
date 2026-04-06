@@ -6,16 +6,20 @@
      th:classappend="${header.typeString}">
     <a class="toggleButton">&plusmn;</a>
     <span class="intervalDetails">
-    Interval <span class="interval" th:text="${header.intervalString}"></span>
-    ::
-    Accounts <span class="account" th:each="accountColor : ${header.accountColors}"
-                   th:styleappend="${'background-color:' + accountColor}">&nbsp;&nbsp;&nbsp;</span>
-    ::
-    Count <span class="count" th:text="${header.size}"></span>
-    ::
-    Movement
-    <span th:class="${header.differentialMovement.colorClass}"
-          th:text="${header.differentialMovement}"></span>
+        Interval <span class="interval" th:text="${header.intervalString}"></span>
+        ::
+        Accounts <span class="account" th:each="accountColor : ${header.accountColors}"
+                       th:styleappend="${'background-color:' + accountColor}">&nbsp;&nbsp;&nbsp;</span>
+        ::
+        Count <span class="count" th:text="${header.size}"></span>
+        ::
+        Movement
+        <span th:class="${header.differentialMovement.colorClass}"
+              th:text="${header.differentialMovement}">
+        </span>
+    </span>
+    <span class="percentalDifferentialMovement"
+          th:text="${header.percentalDifferentialMovement}">
     </span>
     <span class="separatedMovements">
     [ <span th:text="${header.absoluteMovement}"></span>

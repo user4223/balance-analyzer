@@ -22,4 +22,6 @@ public interface TransactionCollection {
     Number getNegativeMovement();
 
     List<String> getAccountColors();
+
+    String getPercentalDifferentialMovement();
 }

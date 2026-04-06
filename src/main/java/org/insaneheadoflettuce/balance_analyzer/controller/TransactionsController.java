@@ -80,7 +80,7 @@ public class TransactionsController {
         return "clusters";
     }
 
-    class Year {
+    static class Year {
         private final TransactionInterval year;
         private final List<TransactionInterval> months;
 
@@ -123,14 +123,15 @@ public class TransactionsController {
         final List<Year> years = new ArrayList<>();
         new IntervalChopper(optionalRange.get()).walkYearsBack((yearBegin, yearEnd) ->
         {
-            final var year = new Year(new TransactionInterval(yearBegin, yearEnd, cluster));
+            final var yearInterval = new TransactionInterval(yearBegin, yearEnd, cluster);
+            final var year = new Year(yearInterval);
             if (year.year.getTransactions().isEmpty()) {
                 logger.debug("Ignoring empty year: " + yearBegin.format(yearFormatter));
                 return;
             }
             new IntervalChopper(yearBegin, yearEnd).walkMonthsBack((monthBegin, monthEnd) ->
             {
-                final var month = new TransactionInterval(monthBegin, monthEnd, cluster);
+                final var month = new TransactionInterval(monthBegin, monthEnd, cluster, yearInterval);
                 if (month.getTransactions().isEmpty()) {
                     logger.debug("Ignoring empty month: " + monthBegin.format(monthFormatter));
                     return;
